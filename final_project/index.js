@@ -3,6 +3,7 @@ const jwt = require('jsonwebtoken');
 const session = require('express-session')
 const customer_routes = require('./router/auth_users.js').authenticated;
 const genl_routes = require('./router/general.js').general;
+const { SECRET_KEY } = require('./config');
 
 const app = express();
 
@@ -12,6 +13,17 @@ app.use("/customer",session({secret:"fingerprint_customer",resave: true, saveUni
 
 app.use("/customer/auth/*", function auth(req,res,next){
 //Write the authenication mechanism here
+try{
+    const token = req.session.token
+    if(token){
+        jwt.verify(token, SECRET_KEY)
+        next()
+    }else{
+        res.status(401).send("Invalid or expired token");
+    }
+}catch(error){
+res.status(401).send("Invalid or expired token");
+}
 });
  
 const PORT =5000;
