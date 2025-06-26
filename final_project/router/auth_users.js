@@ -68,6 +68,28 @@ return res.status(200).json({
   
 });
 
+regd_users.delete("/auth/review/:isbn", (req, res) => {
+  try{
+      const isbn = parseInt(req.params.isbn)
+      if(!isbn){return res.status(401).send("please provide isbn id!")}
+
+      const book = books[isbn]
+      if(!book){return res.status(404).send("no book found for the isbn id!")}
+
+      const username = req.user.username
+      delete books[isbn].reviews[username]
+      return res.status(200).json({
+  message: `deleted review for user: ${username}`,
+  currentReviews: book.reviews
+});
+
+  }catch(error){
+      console.log(error)
+      return res.status(500).json({message: "something gone wrong!"});
+  }
+});
+
+
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;
 module.exports.users = users;
