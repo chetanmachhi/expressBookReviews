@@ -16,7 +16,8 @@ app.use("/customer/auth/*", function auth(req,res,next){
 try{
     const token = req.session.token
     if(token){
-        jwt.verify(token, SECRET_KEY)
+        const decode = jwt.verify(token, SECRET_KEY)
+        req.user = decode;
         next()
     }else{
         res.status(401).send("Invalid or expired token");
