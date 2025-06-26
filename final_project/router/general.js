@@ -62,13 +62,33 @@ public_users.get('/author/:author',function (req, res) {
 // Get all books based on title
 public_users.get('/title/:title',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  try{
+    const title = req.params.title
+    if(!title){return res.status(404).send("title is needed to search!")}
+    const bookByTitle = []
+    for(let id in books)
+    {
+      if(title === books[id].title)
+      {
+        bookByTitle.push(books[id])
+      }
+    }
+    return res.status(200).json(bookByTitle)
+  }catch (error){
+        console.log(error)
+        return res.status(500).json({message: "something gone wrong!"});
+  }
 });
 
 //  Get book review
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
-  return res.status(300).json({message: "Yet to be implemented"});
+  try{
+
+  }catch(errro){
+        console.log(error)
+        return res.status(500).json({message: "something gone wrong!"});
+  }
 });
 
 module.exports.general = public_users;
