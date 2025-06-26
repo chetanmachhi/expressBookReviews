@@ -84,8 +84,15 @@ public_users.get('/title/:title',function (req, res) {
 public_users.get('/review/:isbn',function (req, res) {
   //Write your code here
   try{
+    const isbn = req.params.isbn
+    if(!isbn){return res.status(400).send("isbn is needed to search!")}
 
-  }catch(errro){
+    const book = books[isbn]
+    if(!book){return res.status(404).send("book does not exist")}
+
+    return res.status(200).json(book.reviews)
+
+  }catch(error){
         console.log(error)
         return res.status(500).json({message: "something gone wrong!"});
   }
