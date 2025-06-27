@@ -124,13 +124,24 @@ public_users.get('/review/:isbn',function (req, res) {
 // }
 // getBookList()
 
-async function getBookByISBN(){
+// async function getBookByISBN(){
+//   try{
+//       const response = await axios.get("http:localhost:5000/isbn/1")
+//       console.log(response.data)
+//   }catch(error){
+//     console.log(error)
+//   }
+// }
+// getBookByISBN()
+
+async function getBookByAuthor(){
   try{
-      const response = await axios.get("http:localhost:5000/isbn/1")
-      console.log(response.data)
+    const response = await axios.get("http://localhost:5000/author/Chinua Achebe")
+    console.log(JSON.stringify(response.data))
   }catch(error){
     console.log(error)
   }
 }
-getBookByISBN()
+getBookByAuthor()
+
 module.exports.general = public_users;
