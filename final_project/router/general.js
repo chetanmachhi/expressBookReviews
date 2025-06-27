@@ -112,27 +112,28 @@ public_users.get('/review/:isbn',function (req, res) {
   }
 });
 
+///Improving the scope of Tasks 1-4 using Promises or Async-Await///
 
 
-// async function getBookList(){
-//   try{
-//     const response = await axios.get("http://localhost:5000/");
-//     console.log(response.data)
-//   }catch(error){
-//     console.log(error.message)
-//   }
-// }
-// getBookList()
+async function getBookList(){
+  try{
+    const response = await axios.get("http://localhost:5000/");
+    console.log(response.data)
+  }catch(error){
+    console.log(error.message)
+  }
+}
+getBookList()
 
-// async function getBookByISBN(){
-//   try{
-//       const response = await axios.get("http:localhost:5000/isbn/1")
-//       console.log(response.data)
-//   }catch(error){
-//     console.log(error)
-//   }
-// }
-// getBookByISBN()
+async function getBookByISBN(){
+  try{
+      const response = await axios.get("http:localhost:5000/isbn/1")
+      console.log(response.data)
+  }catch(error){
+    console.log(error)
+  }
+}
+getBookByISBN()
 
 async function getBookByAuthor(){
   try{
@@ -143,5 +144,15 @@ async function getBookByAuthor(){
   }
 }
 getBookByAuthor()
+
+async function getBookByTitle(){
+  try {
+    const response = await axios.get("http://localhost:5000/title/Things Fall Apart")
+    console.log(response.data)
+  }catch(error){
+    console.log(error)
+  }
+}
+getBookByTitle()
 
 module.exports.general = public_users;
